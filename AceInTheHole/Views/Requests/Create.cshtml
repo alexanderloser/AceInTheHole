@@ -1,0 +1,125 @@
+﻿@model AceInTheHole.Models.Request
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="">                        <!-- TODO: придумать сюда описание -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <link rel="image_src" href="">                              <!-- TODO: сюда - логотип для вк -->
+    <link rel="shortcut icon" href="" type="image/x-icon">      <!-- TODO: сюда - фавикон -->
+
+    <link href="~/Content/css/reset.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/css/message.css" rel="stylesheet" type="text/css">
+
+    <title>Козырь в рукаве - Маркетинговое агенство</title>
+</head>
+<body>
+    <div id="glass" class="noselect">
+        <div id="gears">
+            <img id="extra_gear" src="~/Content/images/gears/gear3_m.svg" alt="" class="gear">
+            <img src="~/Content/images/gears/gear1_g.svg" alt="" class="gear">
+            <img src="~/Content/images/gears/gear1_m.svg" alt="" class="gear">
+            <img src="~/Content/images/gears/gear1_y.svg" alt="" class="gear">
+            <img src="~/Content/images/gears/gear2_g.svg" alt="" class="gear">
+            <img src="~/Content/images/gears/gear2_m.svg" alt="" class="gear">
+            <img src="~/Content/images/gears/gear4_g.svg" alt="" class="gear">
+            <img id="big_gear" src="~/Content/images/gears/gear4_m.svg" alt="" class="gear">
+        </div>
+        <canvas id="canvas"></canvas>
+        <div id="white"></div>
+    </div>
+
+
+
+    <div id="modal_wrapper">
+        <div id="modal">
+                @using (Html.BeginForm())
+                {
+                  //  @Html.AntiForgeryToken()
+
+                    <span onclick="modal_close()"><i class="fa fa-close"></i></span>
+                    <h4>Оставьте свои данные<br>и мы обязательно перезвоним</h4>
+
+                    <p class="in">@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { placeholder = "Имя", required = "required", type = "text"} })</p>
+                    <p class="in">@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { placeholder = "Фамилия", required = "required", type = "text" } })</p>
+                    <p class="in">@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { placeholder = "Телефон", id = "phone", onblur = "ValidPhone()" } })</p>
+                    <p class="in">@Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { placeholder = "E-mail" } })</p>
+                    <p class="in"><input value="Подтвердить" type="submit" id="ok"></p>
+                }
+        </div>
+    </div>
+
+    <div id="click_me"></div>
+
+    <header class="noselect">
+        <div id="head_wrapper" role="banner">
+            <div id="logo_wrapper">
+                <img class="noselect" id="logo" src="~/Content/images/logo_1.svg" alt="Козырь в рукаве">
+            </div>
+            <div id="slogan_wrapper">
+                <h1 class="noselect" id="name">Козырь в рукаве</h1>
+                <h1 class="noselect">Маркетинговое агенство</h1>
+            </div>
+        </div>
+        <div id="contacts" role="complementary">
+            <p id="phone">
+                <span class="noselect">8 914 475 93 74</span>
+            </p>
+        </div>
+    </header>
+
+
+    <section class="noselect" id="content" role="main">
+        <div id="info_wrapper">
+            <article id="description">
+                <span>Ваш Козырь в ведении Бизнеса</span><br>Morbi quis tincidunt mi.
+                Morbi efficitur, orci sed congue suscipit, lacus ipsum scelerisque quam, suscipit hendrerit libero nisl
+                quis leo.
+            </article>
+        </div>
+
+        <div id="button_wrapper">
+            <button id="order_button" onclick="modal_show()" role="button">Заказать бесплатный звонок</button>
+        </div>
+
+        <div class="noselect" id="services_wrapper" role="group">
+            <ul id="services" role="menu">
+                <li class="icon_wrapper" role="menuitem" onclick="setupMessageButton('Создадим сайт сайт для вас', 'В любой рекламной кампании и коммуникациях с клиентами важен сайт. Плохой сайт посетитель закроет уже через 2 секунды и, естественно, уйдет к вашим конкурентам. Наша компания разработает качественный сайт для вас, который не только увеличит количество заявок в несколько раз, а еще и станет лицом вашего бренда благодаря уникальному дизайну. На выходе вы получите идеальную посадочную страницу для рекламы, которая превратит любого посетителя в вашего клиента. И вашим менеджерам останется только «закрыть» на товар или услугу такого посетителя.')">
+                    <img class="icon" alt="Создание сайтов" src="~/Content/images/site_chb.svg">
+                </li>
+                <li class="icon_wrapper" role="menuitem" onclick="setupMessageButton('Продвинем ваш бизнес в социальных сетях', 'Социальные сети – это уже давно не просто развлечение и беззаботная трата времени, а полноценный бизнес, на пространстве которого миллионы ваших клиентов, которые уже сами группируют себя на группы и категории, и ждут свой товар или услугу. Мы полностью анализируем вас и вашу компанию, определяем и проводим анализ ваших конкурентов, чтоб максимально качественно подобрать стратегию продвижения. Мы не занимаемся «набиванием» групп подписчиками, которые ничего не делают, а проводим долгосрочное продвижение вас и вашей компании. Разрабатываем уникальное название паблика/группы и дизайн аватара. Прорабатываем цели и акции. Пишем описание паблика/группы, передаем все боли клиента, преимущества компании и создаём эмоциональный образ. Разрабатываем тематику и тайминг размещения постов. Запускаем таргетинговую рекламу в социальной сети для привлечения подписчиков. При необходимости запускаем дополнительные каналы продвижения. Отслеживаем поведение подписчиков, негативные комментарии и вносим нужные правки. Мы сотрудничаем на наших условиях, за что и несем ответственность.')">
+                    <img class="icon" alt="Продвижеие" src="~/Content/images/social.svg">
+                </li>
+                <li class="icon_wrapper" role="menuitem">
+                    <img class="icon" alt="Контекстная реклама" src="~/Content/images/context_chb.svg">
+                </li>
+                <li class="icon_wrapper" role="menuitem">
+                    <img class="icon" alt="E-mail маркетинг" src="~/Content/images/mail_chb.svg">
+                </li>
+            </ul>
+            <ul id="services_descriptions">
+                <li class="service_desc" onclick="setupMessageButton('Создадим сайт сайт для вас', 'В любой рекламной кампании и коммуникациях с клиентами важен сайт. Плохой сайт посетитель закроет уже через 2 секунды и, естественно, уйдет к вашим конкурентам. Наша компания разработает качественный сайт для вас, который не только увеличит количество заявок в несколько раз, а еще и станет лицом вашего бренда благодаря уникальному дизайну. На выходе вы получите идеальную посадочную страницу для рекламы, которая превратит любого посетителя в вашего клиента. И вашим менеджерам останется только «закрыть» на товар или услугу такого посетителя.')">Создадим сайт для Вас</li>
+                <li class="service_desc" onclick="setupMessageButton('Продвинем ваш бизнес в социальных сетях', 'Социальные сети – это уже давно не просто развлечение и беззаботная трата времени, а полноценный бизнес, на пространстве которого миллионы ваших клиентов, которые уже сами группируют себя на группы и категории, и ждут свой товар или услугу. Мы полностью анализируем вас и вашу компанию, определяем и проводим анализ ваших конкурентов, чтоб максимально качественно подобрать стратегию продвижения. Мы не занимаемся «набиванием» групп подписчиками, которые ничего не делают, а проводим долгосрочное продвижение вас и вашей компании. Разрабатываем уникальное название паблика/группы и дизайн аватара. Прорабатываем цели и акции. Пишем описание паблика/группы, передаем все боли клиента, преимущества компании и создаём эмоциональный образ. Разрабатываем тематику и тайминг размещения постов. Запускаем таргетинговую рекламу в социальной сети для привлечения подписчиков. При необходимости запускаем дополнительные каналы продвижения. Отслеживаем поведение подписчиков, негативные комментарии и вносим нужные правки. Мы сотрудничаем на наших условиях, за что и несем ответственность.')">Продвинем Ваш бизнес в социальных сетях</li>
+                <li class="service_desc" onclick="setupMessageButton('Расскажем о вас поисковым системам', 'body')">Расскажем о Вас поисковым системам</li>
+                <li class="service_desc" onclick="setupMessageButton('title', 'body')">Напомним о Вас Вашим старым клиентам</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/javascript/blurry.js"></script>
+    <script src="~/Content/javascript/message.js"></script>
+</body>
+</html>
