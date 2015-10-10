@@ -5,22 +5,20 @@
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="ru">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="description" content="">                        <!-- TODO: придумать сюда описание -->
+    <meta name="description" content="Создание и продвижение сайтов. Контекстная реклама, социальные сети. Козырь в руке Вашего бизнеса!">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-    <link rel="image_src" href="">                              <!-- TODO: сюда - логотип для вк -->
-    <link rel="shortcut icon" href="" type="image/x-icon">      <!-- TODO: сюда - фавикон -->
+    <link rel="image_src" href="~/Content/images/logo_vk.jpg">
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico" type="image/x-icon">
 
     <link href="~/Content/css/reset.css" rel="stylesheet" type="text/css">
     <link href="~/Content/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="~/Content/css/style.css" rel="stylesheet" type="text/css">
-    <link href="~/Content/css/message.css" rel="stylesheet" type="text/css">
 
-    <title>Козырь в рукаве - Маркетинговое агенство</title>
+    <title>Козырь в рукаве &#8212 Маркетинговое агенство</title>
 </head>
 <body>
     <div id="glass" class="noselect">
@@ -41,20 +39,106 @@
 
 
     <div id="modal_wrapper">
-        <div id="modal">
-                @using (Html.BeginForm())
-                {
-                  //  @Html.AntiForgeryToken()
+        <div id="message0" class="modal">
+            @using (Html.BeginForm())
+            {
+                //  @Html.AntiForgeryToken()
 
-                    <span onclick="modal_close()"><i class="fa fa-close"></i></span>
-                    <h4>Оставьте свои данные<br>и мы обязательно перезвоним</h4>
+                <span onclick="message_close('message0')"><i class="fa fa-close"></i></span>
+                <h4>Оставьте свои данные<br>и мы обязательно перезвоним</h4>
 
-                    <p class="in">@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { placeholder = "Имя", required = "required", type = "text"} })</p>
-                    <p class="in">@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { placeholder = "Фамилия", required = "required", type = "text" } })</p>
-                    <p class="in">@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { placeholder = "Телефон", id = "phone", onblur = "ValidPhone()" } })</p>
-                    <p class="in">@Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { placeholder = "E-mail" } })</p>
+                <p class="in">@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { placeholder = "Имя", required = "required", id = "fname", type = "text", onkeydown = "ValidName()" } })</p>
+                <p class="in">@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { placeholder = "Фамилия", required = "required", id = "sname", onkeydown = "ValidSurname()", type = "text" } })</p>
+                    <p class="in">@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { placeholder = "Телефон", required = "required", id = "phone_number", onkeydown = "ValidPhone()" } })</p>
+                    <p class="in">@Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { placeholder = "E-mail", required = "required", id = "email", type = "email", onkeydown = "ValidEmail()" } })</p>
                     <p class="in"><input value="Подтвердить" type="submit" id="ok"></p>
-                }
+            }
+        </div>
+
+        <div id="message1" class="modal noselect">
+            <div>
+                <span class="my-message-close" onclick="message_close('message1')"><i class="fa fa-close"></i></span>
+                <h3 class="my-message-title">Создадим сайт сайт для вас</h3>
+                <p class="my-message-body">
+                    "То, что не делаете Вы сегодня, делают Ваши конкуренты"<br><br>
+        
+                    Как для любого человека нужен дом, так и для каждого бизнеса нужен свой сайт. И это не красивые
+                    слова, а самые настоящие реалии жизни. Мы считаем, что Вы не из тех, кто выбирает одностраничные
+                    и неказистые "хрущевки". Вы тот, в чьих планах хорошая и многоинформационная "трешка" в новостройке
+                    (как минимум), у кого-то "коттедж", у кого-то "замок" &#8212 почему бы нет? В общем, то место, где
+                    покупатели будут чувствовать себя как дома.<br>
+                    А кто это сделает? Конечно же наши профессионалы, программисты-строители. Так что, будьте уверены,
+                    Ваш "дом" для бизнеса в надежных руках.<br><br>
+                    Не медлите и <span class="modal_link" onclick="message_close('message1'); message_show('message0');">
+                        оставляйте заявку
+                    </span> прямо сейчас!
+                </p>
+            </div>
+        </div>
+        
+        <div id="message2" class="modal noselect">
+            <div>
+                <span class="my-message-close" onclick="message_close('message2')"><i class="fa fa-close"></i></span>
+                <h3 class="my-message-title">Продвинем Ваш бизнес в социальных сетях</h3>
+                <p class="my-message-body">
+                    "Реклама &#8212 разговор с народом"<br><br>
+        
+                    А реклама в социальных сетях &#8212 это просто задушевная беседа со своими друзьями! Это уже давно
+                    не просто развлечение и беззаботная трата времени, а полноценный бизнес, на пространстве которого
+                    тысячи Ваших клиентов, которые уже сами делят себя на группы и категории и ждут свои товары или
+                    услугу.<br>
+                    Мы полностью анализируем Вас и Вашу компанию, определяем и проводим анализ Ваших конкурентов,
+                    чтобы максимально качественно подобрать стратегию продвижения. Мы не занимаемся «набиванием» групп
+                    и аккаунтов подписчиками, которые ничего не делают, а проводим долгосрочное продвижение Вас и
+                    Вашей компании. Прорабатываем цели и акции. При необходимости запускаем дополнительные каналы
+                    продвижения.
+                    <br><br>
+                    <strong>
+                        Можно долго говорить на эту тему, так что лучше просто
+                        <span class="modal_link" onclick="message_close('message2'); message_show('message0');">
+                            оставьте заявку
+                        </span> и мы покажем все на деле!
+                    </strong>
+                </p>
+            </div>
+        </div>
+        
+        <div id="message3" class="modal noselect">
+            <div>
+                <span class="my-message-close" onclick="message_close('message3')"><i class="fa fa-close"></i></span>
+                <h3 class="my-message-title">Расскажем о Вас поисковым системам</h3>
+                <p class="my-message-body">
+                    "Окей, Гугл. Как подняться в первые строки поиска?"<br><br>
+        
+                    Подняться в первые строки поиска можно обратившись в маркетинговое агенство "Козырь в рукаве".
+                    Это не шутка. Настройка Яндекс.Директа, Google Adwords, семантическая разметка, высокочастотные
+                    запросы, работа на целевую аудиторию, анализ рынка, аудит и... все это так непросто и хлопотно!<br>
+                    Но не для нас. Мы ручаемся за то, что покупатели найдут Вас!<br><br>
+                    Так что, не откладывайте на завтра то, что можно сделать сегодня и
+                    <span class="modal_link" onclick="message_close('message3'); message_show('message0');">
+                        оставляйте заявку
+                    </span> немедленно!
+                </p>
+            </div>
+        </div>
+        
+        <div id="message4" class="modal noselect">
+            <div>
+                <span class="my-message-close" onclick="message_close('message4')"><i class="fa fa-close"></i></span>
+                <h3 class="my-message-title">Отправим Вашим клиентам письмо. Много писем :)</h3>
+                <p class="my-message-body">
+                    "Пиши такие письма, которые ты хотел бы получить"<br><br>
+        
+                    Еще один способ ковровой бомбежки Ваших потенциальных покупателей &#8212 это, конечно же, рассылка
+                    (E-mail, Viber и др.)<br>
+                    Очень эффективный инструмент, проигнорировать который не получится. Мужчины и женщины, молодые мамы,
+                    спортивные папы, из Москвы или с Камчатки &#8212 никто не уйдет от Вашего сообщения!<br><br>
+                    Берите и
+                    <span class="modal_link" onclick="message_close('message4'); message_show('message0');">
+                        заполняйте заявку
+                    </span> прямо сейчас, нет времени обьяснять!
+                </p>
+            </div>
         </div>
     </div>
 
@@ -63,7 +147,7 @@
     <header class="noselect">
         <div id="head_wrapper" role="banner">
             <div id="logo_wrapper">
-                <img class="noselect" id="logo" src="~/Content/images/logo_1.svg" alt="Козырь в рукаве">
+                <img class="noselect" id="logo" src="~/Content/images/logo.svg" alt="Козырь в рукаве">
             </div>
             <div id="slogan_wrapper">
                 <h1 class="noselect" id="name">Козырь в рукаве</h1>
@@ -72,7 +156,7 @@
         </div>
         <div id="contacts" role="complementary">
             <p id="phone">
-                <span class="noselect">8 914 475 93 74</span>
+                <span class="noselect">8 914 431 67 77</span>
             </p>
         </div>
     </header>
@@ -81,45 +165,39 @@
     <section class="noselect" id="content" role="main">
         <div id="info_wrapper">
             <article id="description">
-                <span>Ваш Козырь в ведении Бизнеса</span><br>Morbi quis tincidunt mi.
-                Morbi efficitur, orci sed congue suscipit, lacus ipsum scelerisque quam, suscipit hendrerit libero nisl
-                quis leo.
+                <h1>Создаем сайты и продвигаем их в интернете</h1>
             </article>
         </div>
 
         <div id="button_wrapper">
-            <button id="order_button" onclick="modal_show()" role="button">Заказать бесплатный звонок</button>
+            <button id="order_button" onclick="message_show('message0')" role="button">Заказать бесплатный звонок</button>
         </div>
 
         <div class="noselect" id="services_wrapper" role="group">
             <ul id="services" role="menu">
-                <li class="icon_wrapper" role="menuitem" onclick="setupMessageButton('Создадим сайт сайт для вас', 'В любой рекламной кампании и коммуникациях с клиентами важен сайт. Плохой сайт посетитель закроет уже через 2 секунды и, естественно, уйдет к вашим конкурентам. Наша компания разработает качественный сайт для вас, который не только увеличит количество заявок в несколько раз, а еще и станет лицом вашего бренда благодаря уникальному дизайну. На выходе вы получите идеальную посадочную страницу для рекламы, которая превратит любого посетителя в вашего клиента. И вашим менеджерам останется только «закрыть» на товар или услугу такого посетителя.')">
+                <li class="icon_wrapper" role="menuitem" onclick="message_show('message1')">
                     <img class="icon" alt="Создание сайтов" src="~/Content/images/site_chb.svg">
                 </li>
-                <li class="icon_wrapper" role="menuitem" onclick="setupMessageButton('Продвинем ваш бизнес в социальных сетях', 'Социальные сети – это уже давно не просто развлечение и беззаботная трата времени, а полноценный бизнес, на пространстве которого миллионы ваших клиентов, которые уже сами группируют себя на группы и категории, и ждут свой товар или услугу. Мы полностью анализируем вас и вашу компанию, определяем и проводим анализ ваших конкурентов, чтоб максимально качественно подобрать стратегию продвижения. Мы не занимаемся «набиванием» групп подписчиками, которые ничего не делают, а проводим долгосрочное продвижение вас и вашей компании. Разрабатываем уникальное название паблика/группы и дизайн аватара. Прорабатываем цели и акции. Пишем описание паблика/группы, передаем все боли клиента, преимущества компании и создаём эмоциональный образ. Разрабатываем тематику и тайминг размещения постов. Запускаем таргетинговую рекламу в социальной сети для привлечения подписчиков. При необходимости запускаем дополнительные каналы продвижения. Отслеживаем поведение подписчиков, негативные комментарии и вносим нужные правки. Мы сотрудничаем на наших условиях, за что и несем ответственность.')">
-                    <img class="icon" alt="Продвижеие" src="~/Content/images/social.svg">
+                <li class="icon_wrapper" role="menuitem" onclick="message_show('message2')">
+                    <img class="icon" alt="Продвижение" src="~/Content/images/social.svg">
                 </li>
-                <li class="icon_wrapper" role="menuitem">
+                <li class="icon_wrapper" role="menuitem" onclick="message_show('message3')">
                     <img class="icon" alt="Контекстная реклама" src="~/Content/images/context_chb.svg">
                 </li>
-                <li class="icon_wrapper" role="menuitem">
+                <li class="icon_wrapper" role="menuitem" onclick="message_show('message4')">
                     <img class="icon" alt="E-mail маркетинг" src="~/Content/images/mail_chb.svg">
                 </li>
             </ul>
             <ul id="services_descriptions">
-                <li class="service_desc" onclick="setupMessageButton('Создадим сайт сайт для вас', 'В любой рекламной кампании и коммуникациях с клиентами важен сайт. Плохой сайт посетитель закроет уже через 2 секунды и, естественно, уйдет к вашим конкурентам. Наша компания разработает качественный сайт для вас, который не только увеличит количество заявок в несколько раз, а еще и станет лицом вашего бренда благодаря уникальному дизайну. На выходе вы получите идеальную посадочную страницу для рекламы, которая превратит любого посетителя в вашего клиента. И вашим менеджерам останется только «закрыть» на товар или услугу такого посетителя.')">Создадим сайт для Вас</li>
-                <li class="service_desc" onclick="setupMessageButton('Продвинем ваш бизнес в социальных сетях', 'Социальные сети – это уже давно не просто развлечение и беззаботная трата времени, а полноценный бизнес, на пространстве которого миллионы ваших клиентов, которые уже сами группируют себя на группы и категории, и ждут свой товар или услугу. Мы полностью анализируем вас и вашу компанию, определяем и проводим анализ ваших конкурентов, чтоб максимально качественно подобрать стратегию продвижения. Мы не занимаемся «набиванием» групп подписчиками, которые ничего не делают, а проводим долгосрочное продвижение вас и вашей компании. Разрабатываем уникальное название паблика/группы и дизайн аватара. Прорабатываем цели и акции. Пишем описание паблика/группы, передаем все боли клиента, преимущества компании и создаём эмоциональный образ. Разрабатываем тематику и тайминг размещения постов. Запускаем таргетинговую рекламу в социальной сети для привлечения подписчиков. При необходимости запускаем дополнительные каналы продвижения. Отслеживаем поведение подписчиков, негативные комментарии и вносим нужные правки. Мы сотрудничаем на наших условиях, за что и несем ответственность.')">Продвинем Ваш бизнес в социальных сетях</li>
-                <li class="service_desc" onclick="setupMessageButton('Расскажем о вас поисковым системам', 'body')">Расскажем о Вас поисковым системам</li>
-                <li class="service_desc" onclick="setupMessageButton('title', 'body')">Напомним о Вас Вашим старым клиентам</li>
+                <li class="service_desc" onclick="message_show('message1')">Создадим сайт для Вас</li>
+                <li class="service_desc" onclick="message_show('message2')">Продвинем Ваш бизнес в социальных сетях</li>
+                <li class="service_desc" onclick="message_show('message3')">Расскажем о Вас поисковым системам</li>
+                <li class="service_desc" onclick="message_show('message4')">Отправим Вашим клиентам письмо</li>
             </ul>
         </div>
 
     </section>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/Content/javascript/blurry.js"></script>
-    <script src="~/Content/javascript/message.js"></script>
+    <script rel="script" type="text/javascript" src="~/Content/javascript/scripts.js"></script>
 </body>
 </html>

@@ -26,15 +26,14 @@ namespace AceInTheHole.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RequestId,FirstName,LastName,MiddleName,PhoneNumber")] Request request)
+        public async System.Threading.Tasks.Task<ActionResult> Create([Bind(Include = "RequestId,FirstName,LastName,MiddleName,PhoneNumber")] Request request)
         {
             if (ModelState.IsValid)
             {
-                // Отправить оповещение на почту при приеме заявки
-                Email.Send(request);
+                await Email.Send(request);
 
                 db.Requests.Add(request);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Create");
             }
 

@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Web;
 using AceInTheHole.Models;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace AceInTheHole.Models
 {
@@ -16,14 +17,14 @@ namespace AceInTheHole.Models
         private static string MailRecipient = "alexanderloser@gmail.com";
 
         // Отправка сообщения на почту
-        public static void Send(Request request)
+        public static async Task Send(Request request)
         {
-            var body = "<p>Здравствуйте, {0} {1}!</p><p>Мы скоро перезвоним вам по номеру:{2}</p>";
+            var body = "<p>Саня, на нашем сайте заявка от человека с именем, {0} {1}!</p><pЕму можно позвонить по номеру:{2}<br>Его почта: {3}</p>";
             var message = new MailMessage();
             message.To.Add(new MailAddress(MailRecipient));  // replace with valid value 
             message.From = new MailAddress(MailSender);  // replace with valid value
             message.Subject = "Вы оставили заявку на нашем сайте";
-            message.Body = string.Format(body, request.FirstName, request.LastName, request.PhoneNumber);
+            message.Body = string.Format(body, request.FirstName, request.LastName, request.PhoneNumber, request.MiddleName);
 
             message.IsBodyHtml = true;
 
@@ -39,7 +40,8 @@ namespace AceInTheHole.Models
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.EnableSsl = true;
-                smtp.Send(message);
+                await smtp.SendMailAsync(message);
+                message.Dispose();
             }
         }
     }

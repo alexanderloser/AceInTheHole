@@ -101,7 +101,6 @@
     <Content Include="App_Data\Requests_log.ldf">
       <DependentUpon>Requests.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\css\message.css" />
     <Content Include="Content\css\reset.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\font-awesome-4.4.0\css\font-awesome.css" />
@@ -109,6 +108,7 @@
     <Content Include="Content\font-awesome-4.4.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\font-awesome-4.4.0\HELP-US-OUT.txt" />
     <Content Include="Content\images\context_chb.svg" />
+    <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\images\gears\gear1_g.svg" />
     <Content Include="Content\images\gears\gear1_m.svg" />
     <Content Include="Content\images\gears\gear1_y.svg" />
@@ -124,12 +124,13 @@
     <Content Include="Content\images\gears\gear5_g.svg" />
     <Content Include="Content\images\gears\gear5_m.svg" />
     <Content Include="Content\images\gears\gear5_y.svg" />
+    <Content Include="Content\images\logo.svg" />
     <Content Include="Content\images\logo_1.svg" />
+    <Content Include="Content\images\logo_vk.jpg" />
     <Content Include="Content\images\mail_chb.svg" />
     <Content Include="Content\images\site_chb.svg" />
     <Content Include="Content\images\social.svg" />
-    <Content Include="Content\javascript\blurry.js" />
-    <Content Include="Content\javascript\message.js" />
+    <Content Include="Content\javascript\scripts.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\font-awesome-4.4.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\font-awesome-4.4.0\fonts\fontawesome-webfont.ttf" />
