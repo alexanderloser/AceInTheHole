@@ -47,11 +47,11 @@
                 <span onclick="message_close('message0')"><i class="fa fa-close"></i></span>
                 <h4>Оставьте свои данные<br>и мы обязательно перезвоним</h4>
 
-                <p class="in">@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { placeholder = "Имя", required = "required", id = "fname", type = "text", onkeydown = "ValidName()" } })</p>
-                <p class="in">@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { placeholder = "Фамилия", required = "required", id = "sname", onkeydown = "ValidSurname()", type = "text" } })</p>
-                    <p class="in">@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { placeholder = "Телефон", required = "required", id = "phone_number", onkeydown = "ValidPhone()" } })</p>
-                    <p class="in">@Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { placeholder = "E-mail", required = "required", id = "email", type = "email", onkeydown = "ValidEmail()" } })</p>
-                    <p class="in"><input value="Подтвердить" type="submit" id="ok"></p>
+                <p class="in">@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { placeholder = "Имя", required = "required", id = "fname", type = "text", onkeyup = "ValidName()" } })</p>
+                <p class="in">@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { placeholder = "Фамилия", required = "required", id = "sname", onkeyup = "ValidSurname()", type = "text" } })</p>
+                <p class="in">@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { placeholder = "Телефон", required = "required", id = "phone_number", onkeyup = "ValidPhone()" } })</p>
+                <p class="in">@Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { placeholder = "E-mail", required = "required", id = "email", type = "email", onkeyup = "ValidEmail()" } })</p>
+                <p class="in"><input value="Подтвердить" type="submit" id="ok"></p>
             }
         </div>
 
